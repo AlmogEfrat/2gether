@@ -420,18 +420,18 @@ app.get("/users", async (req, res) => {
 app.get("/gendered-users", async (req, res) => {
   const client = new MongoClient(uri);
   const gender = req.query.gender;
+  const userId = req.query.userId;
 
   try {
     await client.connect();
     const database = client.db("app-data");
     const users = database.collection("users");
-    const query = { gender_identity: { $eq: gender } };
+    let query = { user_id: { $ne: userId } };
+    if (gender !== "everyone") {
+      query = { gender_identity: { $eq: gender } };
+    }
     const foundUsers = await users.find(query).toArray();
-    // res.json(foundUsers);
-    //const foundUsers = await users.find().toArray();
-    //console.log(foundUsers);
-    //console.log(gender);
-    console.log(query);
+
     res.json(foundUsers);
   } catch {
     console.log("not work");
@@ -499,8 +499,8 @@ app.get("/messages", async (req, res) => {
 // Add a Message to our Database
 app.post("/message", async (req, res) => {
   const client = new MongoClient(uri);
-  const message = req.body.message;
 
+  const message = req.body.message;
   try {
     await client.connect();
     const database = client.db("app-data");

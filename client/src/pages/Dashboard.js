@@ -1,4 +1,4 @@
-import TinderCard from "react-tinder-card";
+import TinderCard, { contextTypes } from "react-tinder-card";
 import { useEffect, useState } from "react";
 import ChatContainer from "../components/ChatContainer";
 import { useCookies } from "react-cookie";
@@ -17,7 +17,7 @@ const Dashboard = () => {
       const response = await axios.get("http://localhost:8000/user", {
         params: { userId },
       });
-      //console.log(response.data);
+      console.log(response.data.user_id);
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -26,9 +26,9 @@ const Dashboard = () => {
   const getGenderedUsers = async () => {
     try {
       const response = await axios.get("http://localhost:8000/gendered-users", {
-        params: { gender: user?.gender_interest },
+        params: { gender: user?.gender_interest, userId: userId },
       });
-      //console.log(response.data);
+
       setGenderedUsers(response.data);
     } catch (error) {
       console.log(error);
