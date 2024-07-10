@@ -314,7 +314,11 @@ nav .logo-container .logo {
     display: flex;
     flex-direction: column;
 }
-
+.log-out-icon{
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
+}
 
 
 
