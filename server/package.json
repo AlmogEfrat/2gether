@@ -16,8 +16,8 @@
     "mongodb": "^4.17.2",
     "mongoose": "^8.4.4",
     "nodemon": "^2.0.22",
+    "socket.io": "^4.7.5",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {},
   "description": ""
 }
