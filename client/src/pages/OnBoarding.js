@@ -63,8 +63,38 @@ const OnBoarding = () => {
     "Camping",
     "Singing",
   ];
+  //Add a relationship goal
+  const intentArray = [
+    "still trying to understand",
+    "Make new friends",
+    "short term fun",
+    "Short term with an option to extend",
+    "Long term with option to shorten",
+    "long term relationship",
+  ];
+  const disabilityArray = [
+    "Sight",
+    "Physical Disability",
+    "Mental Disability",
+    "Hearing Impairment",
+    "Cardiac Conditions",
+    "Cognitive Disability",
+    "Speech and Language Disorders",
+    "Learning Disabilities",
+    "Mental Health Conditions",
+    "Visual Impairment",
+    "Neurological Disorders",
+    "Autism Spectrum Disorder",
+    "Down Syndrome",
+    "Chronic Illness",
+    "Cerebral Palsy",
+    "Diabetes",
+    "Alzheimer’s Disease",
+    "Other",
+  ];
 
   const [selectedInterests, setSelectedInterests] = useState([]);
+  const [selectedDisability, setSelectedDisability] = useState(""); //הוספת מגבלה
 
   const handleInterestSelect = (interest) => {
     console.log("category", interest);
@@ -76,6 +106,10 @@ const OnBoarding = () => {
       setSelectedInterests((prevInterests) => [...prevInterests, interest]);
     }
     console.log(selectedInterests);
+  };
+  //Add a relationship goal
+  const handleIntentSelect = (intent) => {
+    setSelectedIntent(intent);
   };
 
   const [cookies, setCookie, removeCookie] = useCookies(null);
@@ -92,17 +126,31 @@ const OnBoarding = () => {
     about: "",
     matches: [],
   });
+  ///  disability: "", // Add disability field to form data להוסיף לדאטה בייס?
   const [openModal, setOpenModal] = useState(false);
   ///הוספה לתקנון
   const [openRegulationModal, setOpenRegulationModal] = useState(false); // State for regulation modal
   const [regulationsAccepted, setRegulationsAccepted] = useState(false);
 
+  // Add state for relationship intent modal
+  const [openIntentModal, setOpenIntentModal] = useState(false);
+  const [selectedIntent, setSelectedIntent] = useState("");
+
+  const [openDisabilityModal, setOpenDisabilityModal] = useState(false); ///הוסםת מגבלה
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
+
+  // הוספת מגבלה
+  const handleOpenDisabilityModal = () => setOpenDisabilityModal(true);
+  const handleCloseDisabilityModal = () => setOpenDisabilityModal(false);
 
   ///הוספה לתקנון
   const handleOpenRegulationModal = () => setOpenRegulationModal(true); // Open regulation modal
   const handleCloseRegulationModal = () => setOpenRegulationModal(false); // Close regulation modal
+
+  // Handlers for relationship intent modal
+  const handleOpenIntentModal = () => setOpenIntentModal(true);
+  const handleCloseIntentModal = () => setOpenIntentModal(false);
 
   let navigate = useNavigate();
 
@@ -119,6 +167,8 @@ const OnBoarding = () => {
     const updatedFormData = {
       ...formData,
       interests: selectedInterests,
+      intent: selectedIntent, // Add intent to form data,//Add a relationship goal
+      disability: selectedDisability, /// add Disability
     };
     try {
       const response = await axios.put(
@@ -147,8 +197,13 @@ const OnBoarding = () => {
       [name]: value,
     }));
   };
-  ///הוספה לתקנון
+  ///הוספה מגבלה
+  const handleDisabilitySelect = (disability) => {
+    setSelectedDisability(disability);
+    handleCloseDisabilityModal();
+  };
 
+  ///הוספה לתקנון
   const handleAcceptRegulations = () => {
     setRegulationsAccepted(true); // Mark regulations as accepted
     handleCloseRegulationModal(); // Close the regulation modal
@@ -173,7 +228,6 @@ const OnBoarding = () => {
               value={formData.first_name}
               onChange={handleChange}
             />
-
             <label>Birthday</label>
             <div className="text-dark flex justify-between text-center">
               <input
@@ -207,7 +261,6 @@ const OnBoarding = () => {
                 className="birthday-input"
               />
             </div>
-
             <label>Gender</label>
             <div className="multiple-input-container">
               <input
@@ -238,7 +291,6 @@ const OnBoarding = () => {
               />
               <label htmlFor="more-gender-identity">More</label>
             </div>
-
             <label htmlFor="show-gender">Show Gender on my Profile</label>
             <input
               id="show-gender"
@@ -247,7 +299,6 @@ const OnBoarding = () => {
               onChange={handleChange}
               checked={formData.show_gender}
             />
-
             <label>Show Me</label>
             <div className="multiple-input-container">
               <input
@@ -278,17 +329,38 @@ const OnBoarding = () => {
               />
               <label htmlFor="everyone-gender-interest">Everyone</label>
             </div>
-            <button
-              data-modal-target="default-modal"
-              data-modal-toggle="default-modal"
-              className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              //className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              type="button"
-              onClick={handleOpenModal}
-            >
-              Interests
-            </button>
+            <div className="flex flex-col gap-4">
+              <button
+                data-modal-target="default-modal"
+                data-modal-toggle="default-modal"
+                className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                //className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button"
+                onClick={handleOpenModal}
+              >
+                Interests
+              </button>
 
+              <button
+                data-modal-target="intent-modal" ////goal intert relat
+                data-modal-toggle="intent-modal"
+                className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button"
+                onClick={handleOpenIntentModal}
+              >
+                Relationship Intent
+              </button>
+            </div>{" "}
+            {/* Closed the wrapper div */}
+            <button
+              data-modal-target="disability-modal"
+              data-modal-toggle="disability-modal"
+              className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              type="button"
+              onClick={handleOpenDisabilityModal}
+            >
+              Disability
+            </button>
             <label htmlFor="about">About me</label>
             <input
               id="about"
@@ -299,7 +371,6 @@ const OnBoarding = () => {
               value={formData.about}
               onChange={handleChange}
             />
-
             <label htmlFor="url">Profile Photo</label>
             <input
               type="url"
@@ -313,7 +384,6 @@ const OnBoarding = () => {
                 <img src={formData.url} alt="profile pic preview" />
               )}
             </div>
-
             <button
               type="submit"
               className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -396,6 +466,147 @@ const OnBoarding = () => {
               </div>
             </div>
           )}
+          {openIntentModal && ( // Relationship intent modal
+            <div
+              id="intent-modal"
+              tabIndex="-1"
+              aria-hidden="true"
+              className="fixed inset-0 flex items-center justify-center z-50 overflow-y-auto"
+            >
+              <div className="relative w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
+                <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Relationship Intent
+                  </h3>
+                  <button
+                    type="button"
+                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    onClick={handleCloseIntentModal}
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                      />
+                    </svg>
+                    <span className="sr-only">Close modal</span>
+                  </button>
+                </div>
+                <div className="flex flex-wrap justify-between max-w-full gap-3 mx-5 p-3">
+                  {intentArray.map((intent, index) => (
+                    <div key={index} className="">
+                      <button
+                        type="button"
+                        className={`p-2 rounded-md cursor-pointer text-center ${
+                          selectedIntent === intent
+                            ? "bg-pink-500 text-white"
+                            : "bg-white border border-pink-500 text-pink-500"
+                        }`}
+                        onClick={() => handleIntentSelect(intent)}
+                      >
+                        {intent}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button
+                    type="button"
+                    className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={handleCloseIntentModal}
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    type="button"
+                    className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    onClick={handleCloseIntentModal}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+          {openDisabilityModal && (
+            <div
+              id="disability-modal"
+              tabIndex="-1"
+              aria-hidden="true"
+              className="fixed inset-0 flex items-center justify-center z-50 overflow-y-auto"
+            >
+              <div className="relative w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
+                <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    What type of disability do you have?
+                  </h3>
+                  <button
+                    type="button"
+                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    onClick={handleCloseDisabilityModal}
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                      />
+                    </svg>
+                    <span className="sr-only">Close modal</span>
+                  </button>
+                </div>
+
+                <div className="flex flex-wrap justify-between max-w-full gap-3 mx-5 p-3">
+                  {disabilityArray.map((disability, index) => (
+                    <div key={index} className="">
+                      <button
+                        type="button"
+                        className="p-1 bg-white border border-pink-500 rounded-md cursor-pointer text-center"
+                        onClick={() => handleDisabilitySelect(disability)}
+                      >
+                        {disability}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button
+                    type="button"
+                    className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={handleCloseDisabilityModal}
+                  >
+                    There, I'm done!
+                  </button>
+                  <button
+                    type="button"
+                    className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    onClick={handleCloseDisabilityModal}
+                  >
+                    Decline
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {openRegulationModal && ( // Regulation modal
             <div
               id="regulation-modal"
