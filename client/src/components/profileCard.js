@@ -75,15 +75,12 @@ const ProfileCard = ({ user }) => {
         src={user.url}
         alt="avatar"
       />
-      <div className="flex items-center px-6 py-3 bg-gray-900">
+      <div className="flex items-center px-6 py-3 bg-gray-900 text-center justify-center">
         <h1 className="mx-3 text-white font-semibold text-lg">
           {user.first_name} {user.last_name}
         </h1>
       </div>
       <div className="py-4 px-6">
-        <h2 className="text-2xl font-semibold text-gray-800">
-          {user.first_name} {user.last_name}
-        </h2>
         <p className="py-2 text-lg text-gray-700">
           Date of Birth: {user.dob_day}/{user.dob_month}/{user.dob_year}
         </p>
@@ -95,7 +92,7 @@ const ProfileCard = ({ user }) => {
         <p className="py-2 text-lg text-gray-700">Interests:</p>
         <ul className="list-disc pl-5">
           {user.interests.map((interest, index) => (
-            <li key={index} className="text-gray-700">
+            <li key={index} className="text-gray-700 list-none">
               {interest}
             </li>
           ))}

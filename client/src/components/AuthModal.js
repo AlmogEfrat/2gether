@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { IoMdClose } from "react-icons/io";
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
   const [email, setEmail] = useState(null);
@@ -72,16 +73,16 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
 
   return (
     <div className="auth-modal">
-      <div className="close-icon" onClick={handleClick}>
-        ⓧ
+      <div className="close-icon cursor-pointer" onClick={handleClick}>
+        <IoMdClose />
       </div>
 
-      <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
-      <p>
+      <h2 className="text-lg">{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
+      <p className="mt-5">
         By clicking Log In, you agree to our terms. Learn how we process your
         data in our Privacy Policy and Cookie Policy.
       </p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="mt-5">
         <input
           type="email"
           id="email"
@@ -108,12 +109,10 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         )}
-        <input className="secondary-button" type="submit" />
+        <input className="secondary-button cursor-pointer" type="submit" />
         <p>{error}</p>
         <p>{errorEmail}</p>
       </form>
-
-      <hr />
     </div>
   );
 };

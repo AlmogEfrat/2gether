@@ -40,6 +40,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProfileCard from "../components/profileCard";
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -64,12 +66,26 @@ const Profile = () => {
   }, [cookies.UserId]);
 
   if (!userData) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (
-    <div>
-      <ProfileCard user={userData} />
+    <div className="w-full">
+      <div className="flex justify-start items-start p-5 mx-auto">
+        <Link
+          to={"/dashboard"}
+          className="p-2 text-white bg-black text-md rounded-lg"
+        >
+          Back
+        </Link>
+      </div>
+      <div className="flex justify-center items-center mt-5">
+        <ProfileCard user={userData} />
+      </div>
     </div>
   );
 };

@@ -289,7 +289,7 @@ const OnBoarding = () => {
                 onChange={handleChange}
                 checked={formData.gender_identity === "more"}
               />
-              <label htmlFor="more-gender-identity">More</label>
+              <label htmlFor="more-gender-identity">Other</label>
             </div>
             <label htmlFor="show-gender">Show Gender on my Profile</label>
             <input
@@ -333,8 +333,7 @@ const OnBoarding = () => {
               <button
                 data-modal-target="default-modal"
                 data-modal-toggle="default-modal"
-                className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                //className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white mt-3 text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 type="button"
                 onClick={handleOpenModal}
               >
@@ -344,23 +343,23 @@ const OnBoarding = () => {
               <button
                 data-modal-target="intent-modal" ////goal intert relat
                 data-modal-toggle="intent-modal"
-                className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white mt-3 text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 type="button"
                 onClick={handleOpenIntentModal}
               >
                 Relationship Intent
               </button>
+              <button
+                data-modal-target="disability-modal"
+                data-modal-toggle="disability-modal"
+                className="text-white text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                type="button"
+                onClick={handleOpenDisabilityModal}
+              >
+                Disability
+              </button>
             </div>{" "}
             {/* Closed the wrapper div */}
-            <button
-              data-modal-target="disability-modal"
-              data-modal-toggle="disability-modal"
-              className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              type="button"
-              onClick={handleOpenDisabilityModal}
-            >
-              Disability
-            </button>
             <label htmlFor="about">About me</label>
             <input
               id="about"
@@ -373,7 +372,7 @@ const OnBoarding = () => {
             />
             <label htmlFor="url">Profile Photo</label>
             <input
-              type="url"
+              type="file"
               name="url"
               id="url"
               onChange={handleChange}

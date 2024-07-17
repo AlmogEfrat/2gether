@@ -3,35 +3,45 @@ import { useEffect, useState } from "react";
 import ChatContainer from "../components/ChatContainer";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [genderedUsers, setGenderedUsers] = useState(null);
   const [lastDirection, setLastDirection] = useState();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [loading, setLoading] = useState(false);
 
   const userId = cookies.UserId;
 
   const getUser = async () => {
+    setLoading(true);
     try {
       const response = await axios.get("http://localhost:8000/user", {
         params: { userId },
       });
       console.log(response.data.user_id);
       setUser(response.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   const getGenderedUsers = async () => {
+    setLoading(true);
     try {
       const response = await axios.get("http://localhost:8000/gendered-users", {
         params: { gender: user?.gender_interest, userId: userId },
       });
 
       setGenderedUsers(response.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,6 +88,7 @@ const Dashboard = () => {
 
   return (
     <>
+      {loading && <Loader />}
       {user && (
         <div className="dashboard">
           <ChatContainer user={user} />
@@ -94,7 +105,7 @@ const Dashboard = () => {
                     style={{ backgroundImage: "url(" + genderedUser.url + ")" }}
                     className="card"
                   >
-                    <h3>{genderedUser.first_name}</h3>
+                    <h3 className="text-2xl">{genderedUser.first_name}</h3>
                   </div>
                 </TinderCard>
               ))}
