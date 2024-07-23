@@ -4,6 +4,7 @@ import ChatContainer from "../components/ChatContainer";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import Loader from "../components/Loader";
+import Footer from "../components/Footer";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -90,9 +91,9 @@ const Dashboard = () => {
     <>
       {loading && <Loader />}
       {user && (
-        <div className="dashboard">
+        <div className="dashboard min-w-full">
           <ChatContainer user={user} />
-          <div className="swipe-container">
+          <div className="swipe-container w-1/2">
             <div className="card-container">
               {filteredGenderedUsers?.map((genderedUser) => (
                 <TinderCard
@@ -117,6 +118,9 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+      <div className="w-full justify-center flex-col">
+        <Footer />
+      </div>
     </>
   );
 };

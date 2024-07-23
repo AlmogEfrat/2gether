@@ -95,6 +95,20 @@ const ProfileCard = ({ user }) => {
             </li>
           ))}
         </ul>
+
+        {/* Display relationship intent */}
+        {/* <p className="text-lg text-gray-700">Relationship Intent:</p>
+        <p className="text-lg text-gray-700">{user.intent}</p> */}
+
+        {/* Display relationship intent */}
+        <p className="text-lg text-gray-700">Relationship Intent:</p>
+        <p className="text-lg text-gray-700">
+          {user?.intent || "No intent specified"}
+        </p>
+
+        {/* Display disability information */}
+        <p className="text-lg text-gray-700">Disability Type:</p>
+        <p className="text-lg text-gray-700">{user.disability}</p>
       </div>
     </div>
   );

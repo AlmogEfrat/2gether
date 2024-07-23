@@ -95,6 +95,7 @@ const OnBoarding = () => {
 
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [selectedDisability, setSelectedDisability] = useState(""); //הוספת מגבלה
+  const [selectedIntent, setSelectedIntent] = useState(""); // Initialize with a default value
 
   const handleInterestSelect = (interest) => {
     console.log("category", interest);
@@ -107,10 +108,15 @@ const OnBoarding = () => {
     }
     console.log(selectedInterests);
   };
-  //Add a relationship goal
+
+  /////////////////////////////////////////////////
   const handleIntentSelect = (intent) => {
-    setSelectedIntent(intent);
+    setSelectedIntent(intent); // Directly set the new intent
   };
+  //Add a relationship goal
+  // const handleIntentSelect = (intent) => {
+  //   setSelectedIntent(intent);
+  // };
 
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [formData, setFormData] = useState({
@@ -134,7 +140,8 @@ const OnBoarding = () => {
 
   // Add state for relationship intent modal
   const [openIntentModal, setOpenIntentModal] = useState(false);
-  const [selectedIntent, setSelectedIntent] = useState("");
+
+  //const [selectedIntent, setSelectedIntent] = useState("");
 
   const [openDisabilityModal, setOpenDisabilityModal] = useState(false); ///הוסםת מגבלה
   const handleOpenModal = () => setOpenModal(true);
@@ -153,6 +160,10 @@ const OnBoarding = () => {
   const handleCloseIntentModal = () => setOpenIntentModal(false);
 
   let navigate = useNavigate();
+
+  // const handleIntentSelect = (intent) => { // <-- Changed to select only one intent
+  //   setSelectedIntent(intent);
+  // };
 
   const handleSubmit = async (e) => {
     console.log("submitted", formData);
@@ -183,11 +194,13 @@ const OnBoarding = () => {
     }
   };
 
+  /////////// before change
   const handleChange = (e) => {
     console.log("e", e);
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
     const name = e.target.name;
+    /////////// before change
 
     //check
     console.log(`Setting ${name} to ${value}`);
@@ -465,7 +478,182 @@ const OnBoarding = () => {
               </div>
             </div>
           )}
+          {/* {openIntentModal && ( // Relationship intent modal
+            <div
+              id="intent-modal"
+              tabIndex="-1"
+              aria-hidden="true"
+              className="fixed inset-0 flex items-center justify-center z-50 overflow-y-auto"
+            >
+              <div className="relative w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
+                <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Relationship Intent
+                  </h3>
+                  <button
+                    type="button"
+                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    onClick={handleCloseIntentModal}
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                      />
+                    </svg>
+                    <span className="sr-only">Close modal</span>
+                  </button>
+                </div>
+                <div className="flex flex-wrap justify-between max-w-full gap-3 mx-5 p-3">
+                  {intentArray.map((intent, index) => (
+                    <div key={index}>
+                      <button
+                        type="button"
+                        className={`button-class ${
+                          selectedIntent === intent
+                            ? "active-class bg-pink-500 text-white"
+                            : "bg-white border border-pink-500 text-pink-500"
+                        }`}
+                        onClick={() => handleIntentSelect(intent)}
+                      >
+                        {intent}
+                      </button>
+                    </div>
+                  ))}
+                  {selectedIntent.map((intent) => (
+                    <div className="text-blue-600 text-md" key={intent}>
+                      {intent}
+                    </div>
+                  ))}
+                   ///////////////////////////////////////////////////////////////
+                  {/* {intentArray.map((intent, index) => (
+                    <div key={index} className="">
+                      <button
+                        type="button"
+                        className={`p-2 rounded-md cursor-pointer text-center ${
+                          selectedIntent === intent
+                            ? "bg-pink-500 text-white"
+                            : "bg-white border border-pink-500 text-pink-500"
+                        }`}
+                        onClick={() => handleIntentSelect(intent)} // Selecting a single intent
+                      >
+                        {intent}
+                      </button>
+                    </div>
+                  ))} 
+                  ///////////////////////////////////////////////
+
+                </div>
+                <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button
+                    type="button"
+                    className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={handleCloseIntentModal} // Confirming the selection
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    type="button"
+                    className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    onClick={handleCloseIntentModal} // Closing the modal without changes
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          )} */}
+
           {openIntentModal && ( // Relationship intent modal
+            <div
+              id="intent-modal"
+              tabIndex="-1"
+              aria-hidden="true"
+              className="fixed inset-0 flex items-center justify-center z-50 overflow-y-auto"
+            >
+              <div className="relative w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
+                <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Relationship Intent
+                  </h3>
+                  <button
+                    type="button"
+                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    onClick={handleCloseIntentModal}
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                      />
+                    </svg>
+                    <span className="sr-only">Close modal</span>
+                  </button>
+                </div>
+                <div className="flex flex-wrap justify-between max-w-full gap-3 mx-5 p-3">
+                  {intentArray.map((intent, index) => (
+                    <div key={index} className="">
+                      <button
+                        type="button"
+                        className={`p-2 rounded-md cursor-pointer text-center ${
+                          selectedIntent === intent
+                            ? "bg-pink-500 text-white"
+                            : "bg-white border border-pink-500 text-pink-500"
+                        }`}
+                        onClick={() => handleIntentSelect(intent)}
+                      >
+                        {intent}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-3">
+                  <p>
+                    Selected Intent:{" "}
+                    <strong className="text-blue-600">
+                      {selectedIntent || "None selected"}
+                    </strong>
+                  </p>
+                </div>
+                <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button
+                    type="button"
+                    className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={handleCloseIntentModal}
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    type="button"
+                    className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    onClick={handleCloseIntentModal}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* {openIntentModal && ( // Relationship intent modal
             <div
               id="intent-modal"
               tabIndex="-1"
@@ -535,7 +723,7 @@ const OnBoarding = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
           {openDisabilityModal && (
             <div
               id="disability-modal"

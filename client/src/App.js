@@ -36,6 +36,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import AccessibilityButton from "./components/AccessibilityButton";
 import VideoChat from "./components/VideoChat";
+import Footer from "./components/Footer";
+import AboutUs from "./components/AboutUs";
+import Contact from "./components/Contact";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -52,6 +56,9 @@ const App = () => {
         {authToken && <Route path="/profile" element={<Profile />} />}
         {authToken && <Route path="/profile/:userId" element={<Profile />} />}
         {authToken && <Route path="/chat-video" element={<VideoChat />} />}
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );
