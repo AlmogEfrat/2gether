@@ -1433,8 +1433,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+// WebSocket connection handling
 
-// Default
 app.get("/", (req, res) => {
   res.json("Hello to my app");
 });
@@ -1679,15 +1679,26 @@ app.post("/message", async (req, res) => {
 // Get user profile data
 app.get("/user-profile", async (req, res) => {
   const client = new MongoClient(uri);
-  const userId = req.query.userId;
+  const { userId, requesterId } = req.query;
 
   try {
     await client.connect();
     const database = client.db("app-data");
     const users = database.collection("users");
 
-    const query = { user_id: userId };
-    const user = await users.findOne(query);
+    // Use the requesterId if userId is not specified
+    const effectiveUserId = userId || requesterId;
+
+    if (!effectiveUserId) {
+      return res.status(400).json({ error: "No user ID provided" });
+    }
+
+    const user = await users.findOne({ user_id: effectiveUserId });
+    console.log(user);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
     res.json(user);
   } catch (err) {
     console.error(err);

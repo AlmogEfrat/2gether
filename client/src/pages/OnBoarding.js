@@ -372,7 +372,7 @@ const OnBoarding = () => {
             />
             <label htmlFor="url">Profile Photo</label>
             <input
-              type="file"
+              type="url"
               name="url"
               id="url"
               onChange={handleChange}

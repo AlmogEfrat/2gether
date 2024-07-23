@@ -1,5 +1,5 @@
-import whiteLogo from "../images/tinder_logo_white.png";
-import colorLogo from "../images/color-logo-tinder.png";
+import whiteLogo from "../images/logo.png";
+import colorLogo from "../images/logo.png";
 
 const Nav = ({ authToken, minimal, setShowModal, showModal, setIsSignUp }) => {
   const handleClick = () => {
@@ -8,10 +8,10 @@ const Nav = ({ authToken, minimal, setShowModal, showModal, setIsSignUp }) => {
   };
 
   return (
-    <nav>
-      <div className="logo-container">
+    <nav className="w-full p-5 h-20s">
+      <div className="">
         <img
-          className="logo"
+          className="h-20 w-20s"
           src={minimal ? colorLogo : whiteLogo}
           alt="logo"
         />

@@ -23,7 +23,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
 
     try {
       if (isSignUp && password !== confirmPassword) {
-        setError("הסיסמאות אינן תואמות!"); // בדיקה אם הסיסמאות אינן תואמות
+        setError("Passwords do not match!"); // בדיקה אם הסיסמאות אינן תואמות
         return;
       }
 

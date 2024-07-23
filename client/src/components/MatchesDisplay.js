@@ -1,11 +1,70 @@
+////////////// לפני השינוי צפייה בפרופיל
+
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+// import { useCookies } from "react-cookie";
+// import VideoChat from "./VideoChat";
+
+// const MatchesDisplay = ({ matches, setClickedUser }) => {
+//   const [matchedProfiles, setMatchedProfiles] = useState(null);
+//   const [cookies, setCookie, removeCookie] = useCookies(null);
+
+//   const matchedUserIds = matches.map(({ user_id }) => user_id);
+//   const userId = cookies.UserId;
+
+//   const getMatches = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:8000/users", {
+//         params: { userIds: JSON.stringify(matchedUserIds) },
+//       });
+//       setMatchedProfiles(response.data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     getMatches();
+//   }, [matches]);
+
+//   const filteredMatchedProfiles = matchedProfiles?.filter(
+//     (matchedProfile) =>
+//       matchedProfile.matches.filter((profile) => profile.user_id == userId)
+//         .length > 0
+//   );
+
+//   return (
+//     <div className="matches-display">
+//       {filteredMatchedProfiles?.map((match, _index) => (
+//         <div
+//           key={_index}
+//           className="match-card"
+//           onClick={() => setClickedUser(match)}
+//         >
+//           <div className="img-container">
+//             <img src={match?.url} alt={match?.first_name + " profile"} />
+//           </div>
+//           <h3>{match?.first_name}</h3>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default MatchesDisplay;
+
+////////////// לפני השינוי צפייה בפרופיל
+
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import VideoChat from "./VideoChat";
 
 const MatchesDisplay = ({ matches, setClickedUser }) => {
   const [matchedProfiles, setMatchedProfiles] = useState(null);
-  const [cookies, setCookie, removeCookie] = useCookies(null);
+  const [cookies] = useCookies(["UserId"]);
+  const [showVideoChat, setShowVideoChat] = useState(false);
 
   const matchedUserIds = matches.map(({ user_id }) => user_id);
   const userId = cookies.UserId;
@@ -25,24 +84,27 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
     getMatches();
   }, [matches]);
 
-  const filteredMatchedProfiles = matchedProfiles?.filter(
-    (matchedProfile) =>
-      matchedProfile.matches.filter((profile) => profile.user_id == userId)
-        .length > 0
-  );
-
   return (
     <div className="matches-display">
-      {filteredMatchedProfiles?.map((match, _index) => (
+      {matchedProfiles?.map((match, index) => (
         <div
-          key={_index}
+          key={index}
           className="match-card"
           onClick={() => setClickedUser(match)}
         >
           <div className="img-container">
-            <img src={match?.url} alt={match?.first_name + " profile"} />
+            <img src={match.url} alt={`${match.first_name} profile`} />
           </div>
-          <h3>{match?.first_name}</h3>
+          <h3>{match.first_name}</h3>
+          <Link to={`/profile/${match.user_id}`}>View Profile</Link>{" "}
+          {/* Link to user profile */}
+          {/* chat video */}
+          <Link
+            to={"/chat-video"}
+            className="bg-black p-1 rounded-lg m-2 text-white"
+          >
+            Camera
+          </Link>{" "}
         </div>
       ))}
     </div>
