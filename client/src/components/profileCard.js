@@ -84,14 +84,12 @@ const ProfileCard = ({ user }) => {
         <p className="py-2 text-lg text-gray-700">
           Date of Birth: {user.dob_day}/{user.dob_month}/{user.dob_year}
         </p>
-        {user.show_gender && (
-          <p className="text-lg text-gray-700">
-            Gender: {user.gender_identity}
-          </p>
-        )}
+
+        <p className="text-lg text-gray-700">Gender: {user.gender_identity}</p>
+
         <p className="py-2 text-lg text-gray-700">Interests:</p>
         <ul className="list-disc pl-5">
-          {user.interests.map((interest, index) => (
+          {user?.interests?.map((interest, index) => (
             <li key={index} className="text-gray-700 list-none">
               {interest}
             </li>

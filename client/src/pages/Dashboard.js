@@ -1,4 +1,4 @@
-import TinderCard, { contextTypes } from "react-tinder-card";
+import TinderCard from "react-tinder-card";
 import { useEffect, useState } from "react";
 import ChatContainer from "../components/ChatContainer";
 import { useCookies } from "react-cookie";

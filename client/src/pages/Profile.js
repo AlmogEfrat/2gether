@@ -134,6 +134,7 @@ const Profile = () => {
     return <Loader />;
   }
 
+  console.log(userData);
   return (
     <div className="w-full">
       <div className="flex justify-start items-start p-5 mx-auto">
