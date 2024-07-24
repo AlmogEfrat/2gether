@@ -65,7 +65,7 @@ const About1 = () => {
             Our Founders
           </h1>
           <p className="font-normal text-base leading-6 text-gray-600 ">
-            2-gether was founded by Almog Efrat Abergel and Shay Angel, two
+            2-gether was founded by Almog Efrat Abergel and Shai Angel, two
             passionate fourth-year software engineering students driven by a
             commitment to inclusivity and technological innovation. Together,
             they envisioned a platform that not only brings people together but
@@ -79,13 +79,13 @@ const About1 = () => {
               <img
                 className="md:block hidden"
                 src="almog pic.jpg"
-                alt="Alexa featured Img"
+                alt="Almog Efrat Abergel featured Img"
               />
-              <img
+              {/* <img
                 className="md:hidden block"
                 src="https://i.ibb.co/zHjXqg4/Rectangle-118.png"
-                alt="Alexa featured Img"
-              />
+                alt="Almog Efrat Abergel featured Img"
+              /> */}
               <p className="font-medium text-xl leading-5 text-gray-800 mt-4">
                 Almog Efrat Abergel
               </p>
@@ -94,14 +94,14 @@ const About1 = () => {
             <div className="p-4 pb-6 flex justify-center flex-col items-center">
               <img
                 className="md:block hidden"
-                src="https://i.ibb.co/7nSJPXQ/Rectangle-121.png"
-                alt="Elijah featured img"
+                src="shay.jpg"
+                alt="Shay Angel featured img"
               />
-              <img
+              {/* <img
                 className="md:hidden block"
-                src="https://i.ibb.co/ThZBWxH/Rectangle-121.png"
-                alt="Elijah featured img"
-              />
+                src="shay pic.jpg"
+                alt="Shay Angel featured img"
+              /> */}
               <p className="font-medium text-xl leading-5 text-gray-800 mt-4">
                 Shai Angel
               </p>

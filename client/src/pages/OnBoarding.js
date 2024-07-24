@@ -413,7 +413,7 @@ const OnBoarding = () => {
             >
               <div className="relative w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
                 <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-900">
                     what do you find interesting?
                   </h3>
                   <button
@@ -465,14 +465,14 @@ const OnBoarding = () => {
                     className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     onClick={handleCloseModal}
                   >
-                    there, I'm done!
+                    I'm done!
                   </button>
                   <button
                     type="button"
                     className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                     onClick={handleCloseModal}
                   >
-                    Decline
+                    not interested
                   </button>
                 </div>
               </div>
@@ -582,7 +582,7 @@ const OnBoarding = () => {
             >
               <div className="relative w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
                 <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-text-gray-900">
                     Relationship Intent
                   </h3>
                   <button
@@ -616,7 +616,7 @@ const OnBoarding = () => {
                         className={`p-2 rounded-md cursor-pointer text-center ${
                           selectedIntent === intent
                             ? "bg-pink-500 text-white"
-                            : "bg-white border border-pink-500 text-pink-500"
+                            : "bg-white border border-pink-500 text-black"
                         }`}
                         onClick={() => handleIntentSelect(intent)}
                       >
@@ -639,14 +639,14 @@ const OnBoarding = () => {
                     className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     onClick={handleCloseIntentModal}
                   >
-                    Confirm
+                    I'm done!
                   </button>
                   <button
                     type="button"
                     className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                     onClick={handleCloseIntentModal}
                   >
-                    Cancel
+                    not interested
                   </button>
                 </div>
               </div>
@@ -780,14 +780,14 @@ const OnBoarding = () => {
                     className="text-white bg-gradient-to-r from-[#F05252] to-[#E02424] hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     onClick={handleCloseDisabilityModal}
                   >
-                    There, I'm done!
+                    I'm done!
                   </button>
                   <button
                     type="button"
                     className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                     onClick={handleCloseDisabilityModal}
                   >
-                    Decline
+                    not interested
                   </button>
                 </div>
               </div>

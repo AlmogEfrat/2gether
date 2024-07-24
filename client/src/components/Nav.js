@@ -1,5 +1,5 @@
-import whiteLogo from "../images/logo.png";
-import colorLogo from "../images/logo.png";
+import whiteLogo from "../images/new logo.png";
+import colorLogo from "../images/black logo.png";
 
 const Nav = ({ authToken, minimal, setShowModal, showModal, setIsSignUp }) => {
   const handleClick = () => {
