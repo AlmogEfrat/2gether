@@ -60,6 +60,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import VideoChat from "./VideoChat";
+import { GoDeviceCameraVideo } from "react-icons/go";
 
 const MatchesDisplay = ({ matches, setClickedUser }) => {
   const [matchedProfiles, setMatchedProfiles] = useState(null);
@@ -85,7 +86,7 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
   }, [matches]);
 
   return (
-    <div className="matches-display">
+    <div className="matches-display min-h-screen">
       {matchedProfiles?.map((match, index) => (
         <div
           key={index}
@@ -96,18 +97,64 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
             <img src={match.url} alt={`${match.first_name} profile`} />
           </div>
           <h3>{match.first_name}</h3>
-          <Link to={`/profile/${match.user_id}`}>View Profile</Link>{" "}
-          {/* Link to user profile */}
-          {/* chat video */}
-          <Link
-            to={"/chat-video"}
-            className="bg-black p-1 rounded-lg m-2 text-white"
-          >
-            Camera
-          </Link>{" "}
+
+          <div className="actions-container ">
+            <Link
+              to={`/profile/${match.user_id}`}
+              className="action-link bg-transparent w-1/2 border border-gray-600 p-1 rounded-lg m-2 text-black flex items-center justify-center"
+            >
+              View Profile
+            </Link>
+            <Link
+              to={"/chat-video"}
+              className=" border border-gray-600 p-1 w-1/2 rounded-lg text-black items-center flex justify-center"
+            >
+              Play Video Chat
+              <GoDeviceCameraVideo size={18} className="m-2" />
+            </Link>
+          </div>
         </div>
       ))}
     </div>
+
+    // <div className="matches-display">
+    //   {matchedProfiles?.map((match, index) => (
+    //     <div
+    //       key={index}
+    //       className="match-card"
+    //       onClick={() => setClickedUser(match)}
+    //     >
+    //       <div className="img-container">
+    //         <img src={match.url} alt={`${match.first_name} profile`} />
+    //       </div>
+    //       <h3>{match.first_name}</h3>
+    //        {/* Container for action buttons */}
+    //       <div className="actions-container">
+    //         <Link
+    //           to={`/profile/${match.user_id}`}
+    //           className="bg-transparent border border-gray-600 p-1 rounded-lg m-2 text-black "
+    //         >
+    //           View Profile
+    //       </Link>
+    //       {/* Link to user profile */}
+    //       {/* ------------------------------------- */}
+    //       {/* chat video */}
+    //       <div className="video-chat-link-container">
+    //         <Link
+    //           to={"/chat-video"}
+    //           className="bg-transparent border border-gray-600 p-1 rounded-lg m-2 text-black flex flex-col items-center justify-center"
+    //         >
+    //           play video chat
+    //           <img
+    //             src="video-call.png"
+    //             alt="video Chat"
+    //             style={{ width: "30px", height: "30px" }}
+    //           />
+    //         </Link>
+    //       </div>
+    //     </div>
+    //   ))}
+    // </div>
   );
 };
 

@@ -342,37 +342,65 @@ const OnBoarding = () => {
               />
               <label htmlFor="everyone-gender-interest">Everyone</label>
             </div>
+            {/*Interests button*/}
             <div className="flex flex-col gap-4">
               <button
                 data-modal-target="default-modal"
                 data-modal-toggle="default-modal"
-                className="text-white mt-3 text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="mt-3 text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center flex items-center justify-center gap-2"
                 type="button"
                 onClick={handleOpenModal}
               >
+                <img
+                  src="game.png"
+                  alt="Interests"
+                  style={{ width: "30px", height: "30px" }}
+                />
                 Interests
               </button>
+              {/*Interests button*/}
+
+              {/* --------------------------------------------------------------------- */}
+
+              {/*Relationship Intent button*/}
 
               <button
                 data-modal-target="intent-modal" ////goal intert relat
                 data-modal-toggle="intent-modal"
-                className="text-white mt-3 text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="mt-3 text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center flex items-center justify-center gap-2"
                 type="button"
                 onClick={handleOpenIntentModal}
               >
+                <img
+                  src="search.png"
+                  alt="Relationship Intent"
+                  style={{ width: "30px", height: "30px" }}
+                />
                 Relationship Intent
               </button>
+
+              {/*Relationship Intent button*/}
+
+              {/* ------------------------------------------------------------------- */}
+
+              {/* button Disability */}
               <button
                 data-modal-target="disability-modal"
                 data-modal-toggle="disability-modal"
-                className="text-white text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="mt-3 text-gray-600 bg-transparent border border-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center flex items-center justify-center gap-2"
                 type="button"
                 onClick={handleOpenDisabilityModal}
               >
+                <img
+                  src="equality.png"
+                  alt="Disability Icon"
+                  style={{ width: "30px", height: "30px" }}
+                />
                 Disability
               </button>
-            </div>{" "}
-            {/* Closed the wrapper div */}
+            </div>
+            {/* button Disability */}
+
             <label htmlFor="about">About me</label>
             <input
               id="about"
@@ -383,6 +411,7 @@ const OnBoarding = () => {
               value={formData.about}
               onChange={handleChange}
             />
+
             <label htmlFor="url">Profile Photo</label>
             <input
               type="url"
@@ -582,7 +611,7 @@ const OnBoarding = () => {
             >
               <div className="relative w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
                 <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-text-gray-900">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-900">
                     Relationship Intent
                   </h3>
                   <button
