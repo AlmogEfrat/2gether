@@ -1627,6 +1627,8 @@ app.put("/user", async (req, res) => {
         about: formData.about,
         matches: formData.matches,
         interests: formData.interests,
+        intent: formData.intent,
+        disability: formData.disability,
       },
     };
 

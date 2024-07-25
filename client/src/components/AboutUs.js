@@ -8,7 +8,7 @@ const About1 = () => {
           <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">
             About Us
           </h1>
-          <p className="font-normal text-base leading-6 text-gray-600 ">
+          <p className="font-normal text-base leading-6 text-gray-600 pb-4">
             Welcome to 2-gether, a dating site uniquely tailored for individuals
             with disabilities. Our platform is not just about finding love; it's
             about fostering a supportive community where every member feels
@@ -18,7 +18,7 @@ const About1 = () => {
             Our Mission
           </h1>
 
-          <p className="font-normal text-base leading-6 text-gray-600 ">
+          <p className="font-normal text-base leading-6 text-gray-600 pb-4">
             At 2-gether, we believe everyone deserves the chance to experience
             love and companionship. That's why we've created a safe, welcoming,
             and accessible environment that empowers our users to connect with
@@ -29,7 +29,7 @@ const About1 = () => {
           <h1 className="text-2xl lg:text-2xl font-bold leading-9 text-gray-800 pb-4">
             Why We Built 2-gether
           </h1>
-          <p className="font-normal text-base leading-6 text-gray-600 ">
+          <p className="font-normal text-base leading-6 text-gray-600 pb-4">
             Inspired by courses in our academic studies and conversations with
             community members, we saw a need for a dating platform that goes
             beyond mere functionality. We wanted to create a space that embodies
@@ -42,7 +42,7 @@ const About1 = () => {
           <h1 className="text-2xl lg:text-2xl font-bold leading-9 text-gray-800 pb-4">
             Join Us
           </h1>
-          <p className="font-normal text-base leading-6 text-gray-600 ">
+          <p className="font-normal text-base leading-6 text-gray-600 pb-4">
             We invite you to join 2-gether to explore meaningful relationships
             in a community that celebrates diversity and inclusivity. Whether
             you're looking for friendship, love, or supportive connections, our
@@ -74,7 +74,7 @@ const About1 = () => {
           </p>
         </div>
         <div className="w-full lg:w-8/12 lg:pt-8">
-          <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
+          <div className="grid md:grid-cols-2 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
             <div className="p-4 pb-6 flex justify-center flex-col items-center">
               <img
                 className="md:block hidden"
@@ -97,11 +97,7 @@ const About1 = () => {
                 src="shay.jpg"
                 alt="Shay Angel featured img"
               />
-              {/* <img
-                className="md:hidden block"
-                src="shay pic.jpg"
-                alt="Shay Angel featured img"
-              /> */}
+
               <p className="font-medium text-xl leading-5 text-gray-800 mt-4">
                 Shai Angel
               </p>

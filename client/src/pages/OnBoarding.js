@@ -75,6 +75,7 @@ const OnBoarding = () => {
   const disabilityArray = [
     "Sight",
     "Physical Disability",
+    "Autism",
     "Mental Disability",
     "Hearing Impairment",
     "Cardiac Conditions",
@@ -92,10 +93,16 @@ const OnBoarding = () => {
     "Alzheimer’s Disease",
     "Other",
   ];
+  //לפני שינוי
+  // const [selectedDisability, setSelectedDisability] = useState([]); //הוספת מגבלה
+  // const [selectedIntent, setSelectedIntent] = useState(""); // Initialize with a default value
+  //לפני שינוי
 
   const [selectedInterests, setSelectedInterests] = useState([]);
-  const [selectedDisability, setSelectedDisability] = useState(""); //הוספת מגבלה
-  const [selectedIntent, setSelectedIntent] = useState(""); // Initialize with a default value
+  const [selectedDisability, setSelectedDisability] = useState([]); //הוספת מגבלה
+  const [selectedIntent, setSelectedIntent] = useState([]); // Initialize with a default value
+
+  ///////////////////////////////////////////////////////
 
   const handleInterestSelect = (interest) => {
     console.log("category", interest);
@@ -110,6 +117,26 @@ const OnBoarding = () => {
   };
 
   /////////////////////////////////////////////////
+
+  // Handling the selection of disabilities
+  const handleDisabilitySelect = (disability) => {
+    // Check if the disability is already selected
+    if (selectedDisability.includes(disability)) {
+      // If selected, remove it from the array
+      setSelectedDisability((prevDisabilities) =>
+        prevDisabilities.filter((item) => item !== disability)
+      );
+    } else if (selectedDisability.length < 2) {
+      // If not already selected and less than 2 items, add the new disability
+      setSelectedDisability((prevDisabilities) => [
+        ...prevDisabilities,
+        disability,
+      ]);
+    }
+    console.log("Selected Disabilities: ", selectedDisability);
+  };
+  ///////////////////////////////////////////////////
+
   const handleIntentSelect = (intent) => {
     setSelectedIntent(intent); // Directly set the new intent
   };
@@ -132,18 +159,21 @@ const OnBoarding = () => {
     about: "",
     matches: [],
   });
-  ///  disability: "", // Add disability field to form data להוסיף לדאטה בייס?
-  const [openModal, setOpenModal] = useState(false);
-  ///הוספה לתקנון
-  const [openRegulationModal, setOpenRegulationModal] = useState(false); // State for regulation modal
+
+  // State for regulation modal
+  const [openRegulationModal, setOpenRegulationModal] = useState(false);
   const [regulationsAccepted, setRegulationsAccepted] = useState(false);
 
   // Add state for relationship intent modal
   const [openIntentModal, setOpenIntentModal] = useState(false);
 
-  //const [selectedIntent, setSelectedIntent] = useState("");
+  ///  תחומי עניין
+  const [openModal, setOpenModal] = useState(false);
 
-  const [openDisabilityModal, setOpenDisabilityModal] = useState(false); ///הוסםת מגבלה
+  ///  disability
+  const [openDisabilityModal, setOpenDisabilityModal] = useState(false);
+
+  ///הוספת תחומי עניין
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
@@ -168,10 +198,9 @@ const OnBoarding = () => {
   const handleSubmit = async (e) => {
     console.log("submitted", formData);
     e.preventDefault();
-    //// הוספה לתקנון
 
+    // Check if regulations are accepted
     if (!regulationsAccepted) {
-      // Check if regulations are accepted
       handleOpenRegulationModal(); // Open the regulation modal if not accepted
       return;
     }
@@ -210,11 +239,12 @@ const OnBoarding = () => {
       [name]: value,
     }));
   };
-  ///הוספה מגבלה
-  const handleDisabilitySelect = (disability) => {
-    setSelectedDisability(disability);
-    handleCloseDisabilityModal();
-  };
+  ///לפני השינוי
+  // const handleDisabilitySelect = (disability) => {
+  //   setSelectedDisability(disability);
+  //   handleCloseDisabilityModal();
+  // };
+  ///לפני השינוי
 
   ///הוספה לתקנון
   const handleAcceptRegulations = () => {
@@ -753,6 +783,7 @@ const OnBoarding = () => {
               </div>
             </div>
           )} */}
+          {/* --------------מגבלה---------------------------- */}
           {openDisabilityModal && (
             <div
               id="disability-modal"
@@ -763,7 +794,7 @@ const OnBoarding = () => {
               <div className="relative w-full max-w-2xl max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
                 <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    What type of disability do you have?
+                    Select Disabilities
                   </h3>
                   <button
                     type="button"
@@ -788,20 +819,27 @@ const OnBoarding = () => {
                     <span className="sr-only">Close modal</span>
                   </button>
                 </div>
-
+                {/* ------------------------------------------------------------------------------------------------ */}
                 <div className="flex flex-wrap justify-between max-w-full gap-3 mx-5 p-3">
-                  {disabilityArray.map((disability, index) => (
+                  {disabilityArray.map((category, index) => (
                     <div key={index} className="">
                       <button
                         type="button"
                         className="p-1 bg-white border border-pink-500 rounded-md cursor-pointer text-center"
-                        onClick={() => handleDisabilitySelect(disability)}
+                        onClick={() => handleDisabilitySelect(category)}
                       >
-                        {disability}
+                        {category}
                       </button>
                     </div>
                   ))}
+                  {selectedDisability.map((disability) => (
+                    <div className="text-blue-600 text-md" key={disability}>
+                      {disability}
+                    </div>
+                  ))}
                 </div>
+
+                {/* ///////////////////////////// מגבלה ////////////////////////////// */}
 
                 <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                   <button
