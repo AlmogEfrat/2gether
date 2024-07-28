@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [genderedUsers, setGenderedUsers] = useState(null);
   const [lastDirection, setLastDirection] = useState();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [clickedUser, setClickedUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const userId = cookies.UserId;
@@ -56,6 +57,35 @@ const Dashboard = () => {
     }
   }, [user]);
 
+  // const updateMatches = async (matchedUserId) => {
+  //   try {
+  //     await axios.put("http://localhost:8000/addmatch", {
+  //       userId,
+  //       matchedUserId,
+  //     });
+  //     getUser();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  ///////////שינוי ב-28/7 פתיחת צאט שני משתמשים
+  // const swiped = async (direction, swipedUserId) => {
+  //   if (direction === "right") {
+  //     const response = await axios.put("http://localhost:8000/addmatch", {
+  //       userId,
+  //       matchedUserId: swipedUserId,
+  //     });
+
+  //     if (response.data.matched) {
+  //       console.log("Mutual match found!");
+  //       // Update local state or context to reflect the mutual match and open the chat
+  //       updateChat(swipedUserId); // You will need to define this function
+  //     } else {
+  //       console.log("No mutual match yet.");
+  //     }
+  //   }
+  //   setLastDirection(direction);
+  // };
   const updateMatches = async (matchedUserId) => {
     try {
       await axios.put("http://localhost:8000/addmatch", {
@@ -83,9 +113,15 @@ const Dashboard = () => {
     .map(({ user_id }) => user_id)
     .concat(userId);
 
+  // שינוי ב26/7 משתמשים שלא יראו את עצמם בהתאמות
+
   const filteredGenderedUsers = genderedUsers?.filter(
-    (genderedUUser) => matchedUserIds !== genderedUUser.user_id
+    (genderedUser) => !matchedUserIds.includes(genderedUser.user_id)
   );
+
+  // const filteredGenderedUsers = genderedUsers?.filter(
+  //   (genderedUUser) => matchedUserIds !== genderedUUser.user_id
+  // );
 
   return (
     <>

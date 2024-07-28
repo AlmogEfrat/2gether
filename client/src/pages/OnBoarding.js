@@ -504,7 +504,7 @@ const OnBoarding = () => {
                     <div key={index} className="">
                       <button
                         type="button"
-                        className="p-1 bg-white border border-pink-500 rounded-md cursor-pointer text-center"
+                        className="p-1 bg-white border border-pink-500 rounded-md cursor-pointer text-center hover:bg-gray-200"
                         onClick={() => handleInterestSelect(category)}
                       >
                         {category}
@@ -674,8 +674,8 @@ const OnBoarding = () => {
                         type="button"
                         className={`p-2 rounded-md cursor-pointer text-center ${
                           selectedIntent === intent
-                            ? "bg-pink-500 text-white"
-                            : "bg-white border border-pink-500 text-black"
+                            ? "bg-white border border-pink-500 text-black hover:bg-gray-200"
+                            : "bg-white border border-pink-500 text-black hover:bg-gray-200"
                         }`}
                         onClick={() => handleIntentSelect(intent)}
                       >
@@ -825,7 +825,7 @@ const OnBoarding = () => {
                     <div key={index} className="">
                       <button
                         type="button"
-                        className="p-1 bg-white border border-pink-500 rounded-md cursor-pointer text-center"
+                        className="p-1 bg-white border border-pink-500 rounded-md cursor-pointer text-center hover:bg-gray-200"
                         onClick={() => handleDisabilitySelect(category)}
                       >
                         {category}
