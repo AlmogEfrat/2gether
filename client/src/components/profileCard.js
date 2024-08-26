@@ -58,7 +58,7 @@ const ProfileCard = ({ user }) => {
         <ul className="list-disc pl-5">
           {Array.isArray(user.disability) ? (
             user.disability.map((disability, index) => (
-              <li key={index} className="text-gray-700">
+              <li key={index} className="text-gray-700 list-none">
                 {disability}
               </li>
             ))

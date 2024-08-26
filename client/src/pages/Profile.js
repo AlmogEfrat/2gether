@@ -98,6 +98,8 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+//import ProfileCard from "../components/ProfileCard";
 import ProfileCard from "../components/ProfileCard";
 import { useCookies } from "react-cookie";
 import { Link, useParams } from "react-router-dom";

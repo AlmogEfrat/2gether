@@ -1421,6 +1421,8 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
+require("./websocket");
+
 const uri =
   "mongodb+srv://almogabergel:almog123@cluster0.lsjngbn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
